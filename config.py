@@ -1,8 +1,8 @@
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DATABASE_URI","postgres+psycopg2://postgres:p@127.0.0.1:5432/pitches")
-    SECRET_KEY="gdgfgdfbhji"
+    SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL","postgres+psycopg2://postgres:p@127.0.0.1:5432/pitches")
+    SECRET_KEY=os.environ.get("SECRET_KEY","super secret key")
 
 class DevConfig(Config):
     pass
