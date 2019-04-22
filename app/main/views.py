@@ -46,3 +46,25 @@ def add_pitch():
     return render_template('./main/add_pitch.html',pitch_form=pitch_form)
 
 
+@main.route("/pitch/upvote/<int:pitch_id>")
+@login_required
+def upvote(pitch_id):
+    upvote_=Upvote.query.filter_by(user_id=current_user.id,post_id=pitch_id).first()
+    if not upvote_:
+        upvote_=Upvote(user_id=current_user.id,post_id=pitch_id)
+        upvote_.save()
+    else:
+        upvote_.delete_()
+    return redirect(url_for("main.pitch",pitch_id=pitch_id))
+
+
+@main.route("/pitch/downvote/<int:pitch_id>")
+@login_required
+def downvote(pitch_id):
+    downvote_=Downvote.query.filter_by(user_id=current_user.id,post_id=pitch_id).first()
+    if not downvote_:
+        downvote_=Downvote(user_id=current_user.id,post_id=pitch_id)
+        downvote_.save()
+    else:
+        downvote_.delete_()
+    return redirect(url_for("main.pitch",pitch_id=pitch_id))
