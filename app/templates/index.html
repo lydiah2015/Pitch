@@ -1,0 +1,17 @@
+{% extends "./base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+
+    <div class="container" style="margin-top:30px">
+        <div class="page-header">
+            <h3 >Select a pitch category</h3>
+        </div>
+        <div class="list-group">
+            {% for category in categories %}
+            <a href="/pitches/{{category}}" class="list-group-item list-group-item-action">{{category}}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
