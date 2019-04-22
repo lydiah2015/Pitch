@@ -1,0 +1,28 @@
+{% extends "./base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+    <div class="container" style="margin-top:30px">
+
+        <div class="page-header">
+            <h3>Pitches</h3>
+        </div>
+        <div class="card-columns">
+            {% for pitch in pitches %}
+            <div class="card">
+                <div class="card-header">
+                    <a href="/pitch/{{pitch.id}}">
+                        {{pitch.title}}
+                    </a>
+                </div>
+                <div class="card-body">{{pitch.text[:32]}}</div>
+                <div class="card-footer">
+                    <p>By {{pitch.user.username}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+

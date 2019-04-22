@@ -1,0 +1,75 @@
+{% extends "./base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block content %}
+    <div class="container" style="margin-top:30px">
+        {% if pitch %}
+        <div class="card gedf-card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="ml-2">
+                            <div class="h7 text-muted">{{pitch.title}}</div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="card-body">
+                <div class="text-muted h7 mb-2"> 
+                    <p>Posted on {{pitch.created_at.date()}}</p>
+                    <p>By {{pitch.user.username}}</p>
+                </div>
+                <p class="card-text">
+                    {{pitch.text}}
+                </p>
+                <div>
+                    <span class="badge badge-primary">Upvotes: {{pitch.likes.count()}}</span>
+                    <span class="badge badge-primary">Downvotes: {{pitch.dislikes.count()}}</span>
+                </div>
+            </div>
+            <div class="card-footer">
+                {% if current_user.is_authenticated %}
+                <a href="/pitch/upvote/{{pitch.id}}" class="card-link">upvote</a>
+                <a href="/pitch/downvote/{{pitch.id}}" class="card-link">downvote</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    {% if current_user.is_authenticated %}
+    <div class="container" style="margin-top:30px">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{error}}
+            </div>
+        {% endif %}
+        <div class="card">
+            <div class="card-header">
+                Comment
+            </div>
+            <div class="body">
+                {{ wtf.quick_form(comment_form) }}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="container" style="margin-top:30px">
+        <h4>Comments</h4>
+        {% for comment in comments %}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        Posted by {{comment.user.username}} on {{comment.created_at.date()}}
+                    </div>
+                    <div class="card-body">{{comment.text}}</div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}
