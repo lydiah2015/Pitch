@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h2>Profile</h2>
+        </div>
+        <div class="container">
+            <p>Username: {{current_user.username}}</p>
+            <p>Email: {{current_user.email}}</p>
+        </div>
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading  animate">
+                <h4 class="panel-title">
+                    <span>My Pitches (<span id="postcount">{{current_user.posts.count()}}</span>)</span>
+                </h4>
+                </div>
+                <div class="panel-body">
+                    <div class="card-columns">
+                        {% for pitch in current_user.posts.all() %}
+                        <div class="card">
+                            <div class="card-header">
+                                <a href="/pitch/{{pitch.id}}">
+                                    {{pitch.title}}
+                                </a>
+                            </div>
+                            <div class="card-body">{{pitch.text[:32]}}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}

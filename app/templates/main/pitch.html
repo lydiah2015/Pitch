@@ -28,12 +28,12 @@
                     <span class="badge badge-primary">Downvotes: {{pitch.dislikes.count()}}</span>
                 </div>
             </div>
+            {% if current_user.is_authenticated %}
             <div class="card-footer">
-                {% if current_user.is_authenticated %}
                 <a href="/pitch/upvote/{{pitch.id}}" class="card-link">upvote</a>
                 <a href="/pitch/downvote/{{pitch.id}}" class="card-link">downvote</a>
-                {% endif %}
             </div>
+            {% endif %}
         </div>
         {% endif %}
     </div>

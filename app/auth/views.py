@@ -38,11 +38,16 @@ def register():
     return render_template("./auth/register.html", title = title ,form=form,error=error)
 
 @auth.route("/logout")
+@login_required
 def logout():
     if current_user.is_authenticated:
         logout_user()
     return redirect(url_for('main.index'))
 
+@auth.route("/profile")
+@login_required
+def profile():
+    return render_template("./auth/profile.html")
 
 
 

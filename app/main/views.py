@@ -11,7 +11,7 @@ def index():
 
 @main.route("/pitches/<string:category>")
 def pitches(category):
-    pitches=Post.query.filter_by(category=category)
+    pitches=list(Post.query.filter_by(category=category))
     return render_template("./main/pitches.html",pitches=pitches)
 
 @main.route("/pitch/<int:pitch_id>",methods=["GET","POST"])
