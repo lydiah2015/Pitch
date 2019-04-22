@@ -7,14 +7,15 @@ class User(db.Model,UserMixin):
 	__tablename__='users'
 	id=db.Column(db.Integer,primary_key=True)
 	username=db.Column(db.String(255),unique=True)
+	email=db.Column(db.String(255),unique=True)
 	password=db.Column(db.String(255))
 	posts = db.relationship('Post', backref='user', lazy='dynamic')
 	comments = db.relationship('Comment', backref='user', lazy='dynamic')
 	likes = db.relationship('Upvote', backref='user', lazy='dynamic')
 	dislikes = db.relationship('Downvote', backref='user', lazy='dynamic')
 
-	def verifypass(self,trial):
-		return check_password_hash(self.password,trial)
+	def verifypass(self,pass_check):
+		return check_password_hash(self.password,pass_check)
 
 	@property
 	def passwd(self):
