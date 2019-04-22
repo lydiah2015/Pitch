@@ -7,7 +7,11 @@ class DevConfig(Config):
 class ProdConfig(Config):
     pass
 
+class TestConfig(Config):
+    pass
+
 config_options={
     "development":DevConfig,
-    "production":ProdConfig
+    "production":ProdConfig,
+    "test":TestConfig,
 }
