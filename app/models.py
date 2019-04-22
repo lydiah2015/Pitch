@@ -1,6 +1,7 @@
 from . import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
+from sqlalchemy import func
 from . import login_manager
 
 class User(db.Model,UserMixin):
@@ -40,9 +41,12 @@ class Category(db.Model):
 class Post(db.Model):
 	__tablename__='posts'
 	id=db.Column(db.Integer,primary_key=True)
+	title=db.Column(db.String(255))
 	text=db.Column(db.Text())
 	user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
 	category=db.Column(db.String(255))
+	created_at = db.Column(db.DateTime, index=True, default=func.now())
+	updated_at = db.Column(db.DateTime, default=func.now())
 	likes=db.relationship('Upvote', backref='post', lazy='dynamic')
 	dislikes=db.relationship('Downvote', backref='post', lazy='dynamic')
 	comments=db.relationship('Comment', backref='post', lazy='dynamic')
@@ -63,6 +67,8 @@ class Comment(db.Model):
 	user_id=db.Column(db.Integer, db.ForeignKey('users.id'))
 	post_id=db.Column(db.Integer, db.ForeignKey('posts.id'))
 	text=db.Column(db.Text())
+	created_at = db.Column(db.DateTime, index=True, default=func.now())
+	updated_at = db.Column(db.DateTime, default=func.now())
 	def save(self):
 		db.session.add(self)
 		db.session.commit()
