@@ -3,7 +3,7 @@ Pitch
 
 **Author**: [Lydia Mitchelle Makini](https://github.com/lydiah2015)
 ## Description
-[Pitch](:https://github.com/lydiah2015/Pitch.git) is a web appliction that lets users submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
+[Pitch](https://github.com/lydiah2015/Pitch.git) is a web appliction that lets users submit their one minute pitches and other users will vote on them and leave comments to give their feedback on them.
 
 The pitches are arranged by category and the new posts should be displayed first.
 
@@ -69,7 +69,7 @@ heroku run python run.py db upgrade
 ## Live Demo
 
 The web app can be accessed from the following link
-[heroku-link](heroku-link)
+[https://thepitchup.herokuapp.com](https://thepitchup.herokuapp.com)
 
 ## Technology used
 
